@@ -1,0 +1,141 @@
+<% layout("/layouts/boilerplate") %>
+
+    <style>
+        /* General about section styling */
+        .about {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 50px 20px;
+            background-color: #f8f9fa;
+            /* Light background */
+            border-radius: 8px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            /* Dark text */
+            line-height: 1.7;
+        }
+
+        /* Headings styling */
+        .abt-h2 {
+            font-size: 2.5rem;
+            color: #434240;
+            /* Dark blue heading */
+            text-align: center;
+            margin-bottom: 20px;
+            /* text-transform: uppercase; */
+            letter-spacing: 2px;
+        }
+
+        .about b {
+            display: block;
+            font-size: 1.6rem;
+            color: #e59400;
+            /* Blue for emphasis */
+            margin: 20px 0 10px 0;
+        }
+
+        .about p.abt-p {
+            font-size: 1.1rem;
+            color: #555;
+            /* Dark grey for readability */
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        /* List styling for team members */
+        .about ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .about ul li {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        /* Add a decorative icon next to list items */
+        .about ul li::before {
+            content: '•';
+            color: #e59400;
+            /* Icon color */
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        /* Responsive styling */
+        @media (max-width: 768px) {
+            .abt-h2 {
+                font-size: 2rem;
+            }
+
+            .about b {
+                font-size: 1.4rem;
+            }
+
+            .about p.abt-p,
+            .about ul li {
+                font-size: 1rem;
+            }
+        }
+
+        /* Optional styling for the section */
+        .about p,
+        .about ul li {
+            padding: 10px 0;
+        }
+    </style>
+
+    <div class="about">
+
+        <h2 class="abt-h2">WANDERER </h2>
+        <b>Discover Your Next Adventure with Wanderer</b>
+        <p class="abt-p">
+            Welcome to Wanderer—where your journey begins. We're more than just a travel website. we're your gateway to
+            the world's most captivating destinations. Our passion is to inspire, inform, and ignite your wanderlust
+            with curated experiences and insider knowledge.
+        </p>
+        <b>Our Mission</b>
+
+        <p class="abt-p">At Wanderer, we believe that travel is more than just a destination; it's an opportunity to
+            connect, explore, and grow. Our mission is to make every journey unforgettable by providing you with
+            personalized travel guides, local insights, and tips that transform ordinary trips into extraordinary
+            adventures.</p>
+
+        <b>Our Story</b>
+        <p class="abt-p">Wanderer was born out of a deep-seated love for exploration and a desire to share the magic of
+            travel with the world. It all started with a group of friends who embarked on a road trip across Europe,
+            documenting their experiences and discovering hidden gems along the way. What began as a personal project
+            quickly evolved into a passion to help others experience the joy of discovery.</p>
+
+        <b>Meet the Team</b>
+        <ul>
+            <li> <b>Hadwrsha Baro</b> <i>Co-Founder & Travel Enthusiast</i> : Hadwrsha’s love for off-the-beaten-path
+                destinations and local cuisines drives our content. With a background in cultural studies, he’s
+                dedicated to showcasing authentic experiences. </li>
+            <li> <b>Upangkar Baro</b> <i>Co-Founder & Tech</i> : Upangkar ensures that Wanderer’s technology runs
+                seamlessly, making your travel planning smooth and enjoyable. His knack for innovation helps us provide
+                cutting-edge tools for your journey.</li>
+            <li> <b>Daoharu Basumatary</b> <i>Manager & Explorer</i> : Douharu’s travel stories and photography capture the
+                essence of each destination. His adventures bring to life the vibrant cultures and landscapes we
+                feature.</li>
+        </ul>
+
+        <b>What Sets Us Apart</b>
+        <p class="abt-p"> Wanderer stands out with our commitment to providing unique, tailored travel experiences. We
+            go beyond generic recommendations, offering personalized itineraries and local guides who share their
+            insider knowledge. Our goal is to help you uncover the true spirit of each place you visit, whether it’s a
+            bustling city, a serene village, or a stunning natural wonder.</p>
+
+        <b>Join the Journey</b>
+        <p class="abt-p">Ready to explore the world with us? Follow Wanderer on social media, sign up for our
+            newsletter, or reach out to share your travel dreams. We're here to guide you every step of the way and
+            ensure your adventures are nothing short of spectacular.</p>
+
+    </div>

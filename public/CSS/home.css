@@ -1,0 +1,297 @@
+/* Home*/
+/* .home {
+    width: 100%;
+    height: 100vh;
+    background-image: url("/images/bk.jpg") !important;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.home p{
+    text-align: center;
+    color: white;
+}
+.home .content{
+    text-align: center;
+    padding-top: 200px;
+}
+.home .content h3 {
+    color: white;
+    font-size: 38px;
+    font-weight: 500;
+    text-shadow: 0px 1px 1px black;
+}
+.home .content h2 {
+    color: white;
+    font-weight: 500;
+    font-size: 70px;
+    text-shadow: 0 1px 1px black;
+    margin-top: 5px;
+}
+.changecontent::after{
+    content: ' ';
+    color: rgb(251, 74, 39);
+    text-shadow: 0px 1px 1px black;
+    animation: changetext 10s infinite linear;
+}
+@keyframes changetext {
+    0%{content: "France";}
+    10%{content: "Spain";}
+    20%{content: "Russia";}
+    30%{content: "India";}
+    40%{content: "Thailand";}
+    50%{content: "Mongolia";}
+    60%{content: "China";}
+    70%{content: "Italy";}
+    80%{content: "Mexico";}
+    90%{content: "United States";}
+    100%{content: "Germany";}
+}
+.home .content p{
+    color: white;
+    font-weight: 400;
+    font-size: 15px;
+    text-shadow: 0 1px 1px black;
+    margin-bottom: 30px;
+    margin-top: 5px;
+}
+
+.home .content a {
+    padding: 10px;
+    background-color: white;
+    color: black;
+    letter-spacing: 2px;
+    font-weight: 400;
+    border-radius: 5px;
+    transition: 0.5s;
+    text-decoration: none;
+}
+.home .content a:hover {
+    background-color: #d2302c;
+    color: white;
+} */
+
+
+/* Hero Section */
+.hero {
+    background: url('/images/backkground.jpg') no-repeat center center/cover;
+    color: #ffffff;
+    height: 100vh;
+    display: flex;
+    text-align: left;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+    padding: 0 20px;
+    position: relative;
+}
+
+.hero-content {
+    max-width: 600px;
+    position: relative;
+    z-index: 2; /* Ensure it's above the map */
+   
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    line-height: 1.2;
+    text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.6);
+}
+
+.hero p {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    line-height: 1.6;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+.btn-primary {
+    background-color: #13C3F7!important;
+    color: #fff;
+    padding: 15px 30px;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 1rem;
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-primary:hover {
+    box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.7);
+}
+
+
+/* Package section */
+
+.packages {
+    padding: 40px 20px;
+    /* background-color: #f9f9f9; */
+    background-color: #f0f0f0;;
+    box-sizing: border-box;
+}
+
+/* Main Title Styling */
+.main-txt h3 {
+    text-align: center;
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+/* Card Grid Container */
+.card-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    justify-content: center;
+    max-width: 1200px;
+    margin: auto;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Card Styling */
+.card-body2 {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+    width: 100%;
+    max-width: 300px;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-body2:hover {
+    transform: translateY(-10px);
+}
+
+.card-body2 img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 2px solid #ddd;
+}
+
+.card-body2 h3 {
+    font-size: 1.25rem;
+    margin: 15px 0;
+    color: #333;
+
+}
+
+.rating {
+    margin: 10px 0;
+}
+
+.rating .fa-star {
+    color: #f39c12;
+}
+
+.rating .fa-star.checked {
+    color: #f39c12;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    /* text-transform: uppercase; */
+    font-size: 0.875rem;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn a {
+    color: #fff;
+    text-decoration: none;
+}
+.card-content .all-pack {
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+
+/* Responsive Design for cards of home*/
+@media (max-width: 900px) {
+    .card-content {
+        grid-template-columns: repeat(2, 1fr); /* 2 cards per row on medium screens */
+    }
+}
+
+@media (max-width: 600px) {
+    .card-content {
+        grid-template-columns: 1fr; /* 1 card per row on small screens */
+    }
+}
+
+/* Features Section home*/
+.features {
+    padding: 50px 0;
+    background-color: #fafafa;
+}
+
+.features .container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.feature {
+    flex: 1;
+    min-width: 250px;
+    text-align: center;
+    padding: 20px;
+}
+
+.feature h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.feature p {
+    font-size: 1rem;
+    color: #555;
+}
+
+/* testimonials */
+.testimonials {
+    text-align: center;
+    padding: 50px 0;
+    background-color: #f0f0f0;
+}
+
+.testimonial-cards {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.testimonial-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    width: 300px;
+}
+
+/* Call to action*/
+.cta {
+    padding: 50px;
+    text-align: center;
+}
+

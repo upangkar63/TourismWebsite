@@ -1,0 +1,36 @@
+<% layout("/layouts/boilerplate") %>
+
+<section class="deals">
+    <h2>Special Travel Deals</h2>
+
+    <%for(package of allPackages) {%>
+    <div class="deals-container">
+        <div class="deal-item">
+            <img src="<%= package.image %>" alt="Beach Getaway" style="height: 18rem;">
+            <div class="deal-info">
+                <h3><%= package.title %></h3>
+                <p><%= package.description %></p>
+                <p><b><%= package.location %></b></p>
+                <span class="price">&#8377; <%=package.price.toLocaleString("en-IN")%></span>
+                <a href="/packages/domestic/<%= package._id%>/book" class="btn-primary">Book Now</a>
+            </div>
+        </div>
+        <% } %>
+</section>
+<section class="deals">
+    <h2>Special Deals On International Trips</h2>
+
+    <%for(package of interPacks) {%>
+    <div class="deals-container">
+        <div class="deal-item">
+            <img src="<%= package.image %>" alt="Beach Getaway" style="height: 18rem;">
+            <div class="deal-info">
+                <h3><%= package.title %></h3>
+                <p><%= package.description %></p>
+                <p><b><%= package.location %></b></p>
+                <span class="price">&#8377; <%=package.price.toLocaleString("en-IN")%></span>
+                <a href="/packages/international/<%= package._id%>/book" class="btn-primary">Book Now</a>
+            </div>
+        </div>
+        <% } %>
+</section>

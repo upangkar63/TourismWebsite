@@ -1,0 +1,96 @@
+<% layout("/layouts/boilerplate") %>
+
+    <style>
+        .contact-container {
+            margin-top: 6rem;
+        }
+
+        .header {
+            padding-bottom: 4rem;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            align-content: center;
+            justify-content: space-around;
+
+        }
+
+        .chat,
+        .email,
+        .help {
+            background: rgb(209, 214, 214);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        .team {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-content: center;
+        }
+
+        .support {
+            /* border: 1px solid black; */
+            background-color: rgb(236, 244, 244);
+            height: 100px;
+            width: 100px;
+            border-radius: 50%;
+        }
+
+        .re {
+            font-size: large;
+            font-weight: 500;
+        }
+    </style>
+    <div class="container contact-container">
+        <div class="header">
+            <h1>Get in touch with our friendly support team</h1>
+            <p>Our business hours are 9AM-6PM Monday-Friday (Including official holidays)</p>
+        </div>
+
+        <div class="row">
+            <div class="chat mb-2">
+                <h4>Chat support</h4>
+                <p>Our support team is just a click away.
+                </p>
+                <a href="#" class="contact-us"><b>Chat now</b> <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+            <div class="email mb-2">
+                <h4>Email support</h4>
+                <p> Prefer to email? Send us an email and we'll get back to you soon. </p>
+                <br>
+                <a href="#" class="contact-us"> <b> Send email </b> <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+            <div class="help mb-2">
+                <h4>Help center</h4>
+                <p>Our self-serve help center is open 24/7 with 150+ articles to help. </p>
+                <a href="#" class="contact-us"><b>Visit Help Center</b> <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </div>
+
+        <div class="more-contact mt-5 mb-3">
+            <h6>OUR SUPPORT TEAM</h6>
+            <h3>Talk to real people</h3>
+            Amaxing customer support is the #1 reason our travel site for choosing Wanderer.
+            <div class="team mb-2 mt-5">
+                <div class="cards">
+                    <div class="support"><i class="fa-solid fa-user"></i></div>
+                    <span class="re">Upangkar</span>
+                </div>
+                <div class="cards">
+                    <div class="support"><i class="fa-solid fa-user"></i></div>
+                    <span class="re">Hadwrsha</span>
+                </div>
+                <div class="cards">
+                    <div class="support"><i class="fa-solid fa-user"></i></div>
+                    <span class="re">Dauharu</span>
+                </div>
+               
+            </div>
+        </div>
+    </div>

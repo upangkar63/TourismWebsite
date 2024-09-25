@@ -1,0 +1,129 @@
+<% layout("/layouts/boilerplate") %>
+    <script>
+        const mapToken = "<%=process.env.MAP_TOKEN %>"
+    </script>
+
+    <style>
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: 1;
+        }
+    </style>
+    <section class="hero">
+        <div id="map"></div>
+        <div class="hero-content">
+            <h1>WHERE YOUR JOURNEY BEGINS!</h1>
+            <p>Explore the world with us and make unforgettable memories.</p>
+            <a href="/packages" class="btn-primary">Browse Packages</a>
+        </div>
+    </section>
+
+    <hr>
+    <!-- Package -->
+    <section class="packages">
+        <div class="main-txt">
+            <h3>POPULAR PACKAGES</h3>
+        </div>
+
+        <div class="card-content">
+            <% for(let package of allPackages) { %>
+                <div class="card-body2">
+                    <img src="<%= package.image %>" alt="<%= package.image %>">
+                    <h3>
+                        <%= package.title %>
+                    </h3>
+                    <div class="rating">
+                        <i class="fa-solid fa-star checked"></i>
+                        <i class="fa-solid fa-star checked"></i>
+                        <i class="fa-solid fa-star checked"></i>
+                        <i class="fa-solid fa-star checked"></i>
+                        <i class="fa-solid fa-star checked"></i> 5.0
+
+                    </div>
+                    <button class="btn btn-primary"><a href="/packages/domestic/<%= package._id %>">See Details</a></button>
+                </div>
+                <% } %>
+        </div>
+    </section>
+
+    <!-- International -->
+
+    <section class="packages">
+        <div class="main-txt">
+            <h3>INTERNATIONAL PACKAGES</h3>
+        </div>
+
+        <div class="card-content">
+            <% for(let interpack of interPacks) { %>
+                <div class="card-body2">
+                    <img src="<%= interpack.image %>" alt="<%= interpack.image %>">
+                    <h3>
+                        <%= interpack.title %>
+                    </h3>
+                    <div class="rating">
+                        <i class="fa-solid fa-star checked"></i>
+                        <i class="fa-solid fa-star checked"></i>
+                        <i class="fa-solid fa-star checked"></i>
+                        <i class="fa-solid fa-star checked"></i>
+                        <i class="fa-solid fa-star checked"></i> 5.0
+                    </div>
+                    <button class="btn btn-primary mb-5"><a href="/packages/international/<%= interpack._id %>">See
+                            Details</a></button>
+                </div>
+                <% } %>
+
+        </div>
+    </section>
+
+    <hr>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="feature">
+                <h2>Discover New Destinations</h2>
+                <p>Find the perfect location for your next adventure.</p>
+            </div>
+            <div class="feature">
+                <h2>Exclusive Deals</h2>
+                <p>Get the best offers and discounts on your bookings.</p>
+            </div>
+            <div class="feature">
+                <h2>Easy Booking</h2>
+                <p>Book your trip with just a few clicks.</p>
+            </div>
+            <div class="feature">
+                <h2>Travel Guides and Tips</h2>
+                <p>Get insider knowledge and tips to make the most of your destination.</p>
+            </div>
+        </div>
+
+        <section class="testimonials">
+            <h3>What Our Customers Say</h3>
+            <div class="testimonial-cards">
+                <div class="testimonial-card">
+                    <p>"The Bali package was incredible! Amazing views and well-organized."</p>
+                    <h5>- Elon Musk</h5>
+                </div>
+                <div class="testimonial-card">
+                    <p>"Paris was magical. I loved every second of the tour!"</p>
+                    <h5>- Mark Zuckerberg</h5>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta">
+            <h2>Ready for Your Next Adventure?</h2>
+            <p>Subscribe to our newsletter for exclusive offers!</p>
+            <button class="btn btn-primary">Subscribe Now</button>
+        </section>
+
+
+        <hr>
+    </section>
+
+    <!-- <script src="/JS/map.js"></script> -->

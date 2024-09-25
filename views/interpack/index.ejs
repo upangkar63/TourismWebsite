@@ -1,0 +1,16 @@
+<% layout("/layouts/boilerplate")  %>
+    <h3 class="index mb-4">International Packages</h3>
+    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
+<% for(let package of allPackages) { %>
+<div class="card col">
+    <img src="<%=package.image%>" class="card-img-top" alt="tour_image" style="height: 18rem;">
+    <div class="card-img"></div>
+    <div class="card-body">
+      <h5 class="card-title"><b><%= package.title %></b></h5>
+      <p><b>&#8377; <%=package.price.toLocaleString("en-IN")%> </b></p>
+      <a href="/packages/international/<%= package._id %>" class="btn btn-dark">See Details</a>
+    </div>
+  </div>
+ 
+  <% } %>
+</div>
