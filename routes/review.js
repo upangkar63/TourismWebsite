@@ -5,6 +5,9 @@ const wrapAsync = require("../utils/wrapAsync.js");
 const ExpressError = require("../utils/ExpressError.js");
 const { reviewSchema} = require("../schema.js");
 const Review = require("../models/review.js");
+const {isLoggedIn} = require("../middleware.js");
+
+const reviewController = require("../controllers/reviews.js");
 
 const validateReview = (req, res, next) => {
     let {error} = reviewSchema.validate(req.body);
@@ -16,38 +19,15 @@ const validateReview = (req, res, next) => {
     }
 }
 
-router.post("/", 
+// submitting new review
+router.post("/",
+    isLoggedIn, 
     validateReview, wrapAsync( 
-    async(req, res ) => {
-        // console.log(req.body);
-    let package = await Package.findById(req.params.id);
-    if(!package) {
-        throw new ExpressError("Package not found", 404);
-    }
-    let newReview = new Review(req.body.review);
-    package.reviews.push(newReview);
-
-    await newReview.save();
-    await package.save();
-
-    req.flash("success", "New review Created!");
-
-    res.redirect(`/packages/domestic/${package._id}`);
-    
- }
+    reviewController.createReview
 ));
 
 // Delete review route
-router.delete("/:reviewId", wrapAsync( async(req, res) => {
-    let {id , reviewId} = req.params;
-
-    await Package.findByIdAndUpdate(id, {$pull: {reviews: reviewId}});
-    await Review.findByIdAndDelete(reviewId);
-
-    req.flash("success", "Review Deleted!")
-    res.redirect(`/packages/domestic/${id}`);
-
-
-})
+router.delete("/:reviewId", wrapAsync(reviewController.deleteReview)
 );
+
 module.exports = router;
