@@ -1,4 +1,7 @@
 const User = require("../models/user.js");
+const Package = require("../models/travelTour.js");
+const Booking = require("../models/booking.js");
+const gearBooking = require("../models/gearBooking.js");
 
 module.exports.signupRenderForm = (req, res) => {
     res.render("users/signup.ejs", {showFooter: false});
@@ -39,9 +42,104 @@ module.exports.loginPost =  async(req, res) => {
 }
 
 // user's bookings
-module.exports.bookings = (req, res) => {
-    res.render("users/booking.ejs");
+module.exports.bookings = async(req, res) => {
+    if(!req.user) {
+        req.flash("error", " You must login to your account to see bookings! ")
+    }
+    try {
+        
+        const bookings = await Booking.find({ userId: req.user._id }).populate('packageId'); // Adjust to match your schema
+        res.render("users/booking.ejs", { bookings });
+    } catch (err) {
+        console.error(err);
+        req.flash("error", " Error fetching your bookings ");
+        res.status(500).redirect("/packages/domestic"); 
+    }
 }
+
+
+// user booking details
+module.exports.viewBookingDetails = async (req, res) => {
+    const { bookingId } = req.params; 
+
+    try {
+      
+        const booking = await Booking.findById(bookingId)
+            .populate('packageId')
+            .populate('userId', 'name email phoneno state city'); 
+        if (!booking) {
+            req.flash("error", "Booking not found.");
+            return res.redirect("/my-bookings"); 
+        }
+
+        res.render("users/bookingDetails.ejs", { booking });
+
+    } catch (err) {
+        console.error(err);
+        req.flash("error", "Error fetching your booking details.");
+        res.status(500).redirect("/packages/domestic");
+    }
+};
+
+// delete bookings
+module.exports.deletebooking = async(req, res) => {
+    let { bookingId } = req.params;
+    // console.log(req.parmas.id);
+    let deleted = await Booking.findByIdAndDelete(bookingId);
+    console.log(deleted);
+    req.flash("success", "Your booking has been canceled!");
+    res.redirect("/my-bookings");
+}
+
+// user gear bookings
+module.exports.gearsBookings = async(req, res) => {
+    if(!req.user) {
+        req.flash("error", " You must login to your account to see bookings! ")
+    }
+    try {
+        
+        const bookings = await gearBooking.find({ userId: req.user._id }).populate('gearId'); // Adjust to match your schema
+        res.render("users/gearBooking.ejs", { bookings });
+    } catch (err) {
+        console.error(err);
+        req.flash("error", " Error fetching your bookings ");
+        res.status(500).redirect("/travel-gears"); 
+    }
+}
+
+
+// user booking details
+module.exports.viewGearBookingDetails = async (req, res) => {
+    const { bookingId } = req.params; 
+
+    try {
+      
+        const booking = await gearBooking.findById(bookingId)
+            .populate('gearId')
+            .populate('userId', 'name email phoneno state city'); 
+        if (!booking) {
+            req.flash("error", "Booking not found.");
+            return res.redirect("/my-bookings"); 
+        }
+
+        res.render("users/bookingDetailsGear.ejs", { booking });
+
+    } catch (err) {
+        console.error(err);
+        req.flash("error", "Error fetching your booking details.");
+        res.status(500).redirect("/travel-gears");
+    }
+};
+
+// delete gear's order
+module.exports.deleteGearOrder = async(req, res) => {
+    let { bookingId } = req.params;
+    // console.log(req.parmas._id);
+    let deleted = await gearBooking.findByIdAndDelete(bookingId);
+    console.log(deleted);
+    req.flash("success", "Your order has been canceled!");
+    res.redirect("/my-bookings/gears");
+};
 
 // Logout
 module.exports.logOutUser = (req, res, next) => {

@@ -1,13 +1,13 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router({mergeParams: true});
-const Package = require("../models/travelTour.js");
 const wrapAsync = require("../utils/wrapAsync.js");
 const ExpressError = require("../utils/ExpressError.js");
-const { reviewSchema} = require("../schema.js");
+const {reviewSchema} = require("../schema.js");
 const Review = require("../models/review.js");
+const InterPack = require("../models/internationalPack.js");
 const {isLoggedIn, isReviewAuthor} = require("../middleware.js");
 
-const reviewController = require("../controllers/reviews.js");
+const interReviewController = require("../controllers/interReview.js");
 
 const validateReview = (req, res, next) => {
     let {error} = reviewSchema.validate(req.body);
@@ -23,13 +23,13 @@ const validateReview = (req, res, next) => {
 router.post("/",
     isLoggedIn, 
     validateReview, wrapAsync( 
-    reviewController.createReview
+    interReviewController.createReview
 ));
 
 // Delete review route
 router.delete("/:reviewId",isLoggedIn,
      isReviewAuthor,
-     wrapAsync(reviewController.deleteReview)
+     wrapAsync(interReviewController.deleteReview)
 );
 
 module.exports = router;

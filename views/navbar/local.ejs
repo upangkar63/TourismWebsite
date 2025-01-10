@@ -1,0 +1,97 @@
+<% layout("/layouts/boilerplate") %>
+<style>
+
+    h1 {
+        text-align: center;
+    }
+    .travel-guides {
+        padding: 40px;
+        background-color: #f9f9f9;
+    }
+    
+    .guides-section {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+    }
+    
+    .guide-category {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .guide-category h2 {
+        margin-bottom: 20px;
+    }
+    
+    .guide-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+    }
+    
+    .guide-card {
+        background: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+    }
+    
+    .guide-card:hover {
+        transform: scale(1.05);
+    }
+    
+    .guide-card img {
+        width: 100%;
+        height: auto;
+    }
+    
+    .guide-card h3 {
+        margin: 10px 0;
+        font-size: 1.2em;
+    }
+    
+    .cta-button {
+        display: inline-block;
+        padding: 10px 15px;
+        background-color: #007BFF;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        margin: 10px 0;
+        transition: background-color 0.3s;
+    }
+    
+    .cta-button:hover {
+        background-color: #0056b3;
+    }
+    
+    
+    </style>
+
+    <section class="travel-guides">
+        <h1>Travel Guides</h1>
+        <div class="guides-section">
+            <div class="guide-category">
+                <h2>Local Cuisine</h2>
+                <div class="guide-list">
+                    <div class="guide-card">
+                        <img src="cuisine-guide-1.jpg" alt="Cuisine Guide 1">
+                        <h3>Italian Delicacies</h3>
+                        <p>Discover the flavors of Italy with our guide to traditional dishes.</p>
+                        <a href="/guides/italian-cuisine" class="cta-button">Read More</a>
+                    </div>
+                    <div class="guide-card">
+                        <img src="cuisine-guide-2.jpg" alt="Cuisine Guide 2">
+                        <h3>Street Food in Bangkok</h3>
+                        <p>A culinary journey through the bustling street food scene of Bangkok.</p>
+                        <a href="/guides/bangkok-street-food" class="cta-button">Read More</a>
+                    </div>
+                    <!-- Add more cuisine guides as needed -->
+                </div>
+            </div>
+        </div>
+    </section>

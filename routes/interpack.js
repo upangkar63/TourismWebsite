@@ -17,16 +17,20 @@ const validatePackage = (req, res, next) => {
         next();
     }
 }
+
 // Index route for international package
 router.get("/", wrapAsync(interpackController.index));
 
-// Book page
-router.get("/:id/book", isLoggedIn, interpackController.interPackBook);
+// Book page (GET)
+router.get("/:id/book", isLoggedIn, interpackController.book);
 
-// show route for international pack
-router.get("/:id",
-    wrapAsync(interpackController.interPackShow));
+// Book post (handles form submission)
+router.post("/:id/book", isLoggedIn, wrapAsync(interpackController.booking));
 
+// Confirm booking (GET)
+router.get("/:id/bookings/:bookingId/confirm", interpackController.confirmbook);
 
+// Show route for international pack
+router.get("/:id", wrapAsync(interpackController.interPackShow));
 
 module.exports = router;

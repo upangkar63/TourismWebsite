@@ -4,7 +4,7 @@ const User = require("../models/user.js");
 const passport = require("passport");
 const wrapAsync = require("../utils/wrapAsync.js");
 
-const {saveRedirectUrl} = require("../middleware.js");
+const {saveRedirectUrl, isLoggedIn} = require("../middleware.js");
 const { route } = require("./packages.js");
 
 const usersControllers = require("../controllers/users.js");
@@ -26,6 +26,17 @@ usersControllers.loginPost
 
 // Show Bookings route
 router.get("/my-bookings", usersControllers.bookings);
+
+//bookingpackage Details
+router.get ("/my-bookings/details/:bookingId",isLoggedIn, usersControllers.viewBookingDetails);
+
+router.delete("/my-bookings/details/:bookingId", isLoggedIn, wrapAsync(usersControllers.deletebooking));
+
+router.get("/my-bookings/gears", isLoggedIn, usersControllers.gearsBookings);
+
+router.get("/my-bookings/gears/details/:bookingId", isLoggedIn,usersControllers.viewGearBookingDetails);
+
+router.delete("/my-bookings/gears/details/:bookingId",isLoggedIn, wrapAsync(usersControllers.deleteGearOrder));
 
 // logout
 router.get("/logout", usersControllers.logOutUser);

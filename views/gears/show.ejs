@@ -1,0 +1,224 @@
+<% layout("/layouts/boilerplate") %>
+
+<!-- Custom Styles -->
+<style>
+    /* General Container and Layout */
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    /* Header & Title Styling */
+    .header-title {
+        font-size: 2rem;
+        font-weight: 600;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    /* Card Styling */
+    .card {
+        border: none;
+        border-radius: 12px;
+        overflow: hidden;
+        background-color: #fff;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Image Gallery Layout */
+    .show-img-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .show-img {
+        width: 100%;
+        border-radius: 10px;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        cursor: pointer;
+    }
+
+    .show-img:hover {
+        transform: scale(1.05);
+        opacity: 0.9;
+    }
+
+    /* Modal Styling */
+    .modal-dialog {
+        max-width: 800px;
+        width: 90%;
+    }
+
+    .modal-content {
+        border-radius: 12px;
+        border: none;
+        box-shadow: 0 6px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .modal-body {
+        padding: 0;
+        text-align: center;
+    }
+
+    .modal-body img {
+        width: 100%;
+        height: auto;
+        max-height: 80vh;
+        object-fit: contain;
+        border-radius: 12px;
+    }
+
+    /* Description and Price Styling */
+    .description {
+        padding: 20px;
+        font-size: 1rem;
+        color: #666;
+        line-height: 1.7;
+    }
+
+    .price {
+        font-size: 1.5rem;
+        font-weight: 600;
+      
+        margin-top: 15px;
+    }
+
+    .action-buttons {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+        padding: 20px;
+        border-top: 1px solid #f0f0f0;
+    }
+
+    .bttn {
+        text-decoration: none;
+        padding: 12px 30px;
+        font-size: 1rem;
+        font-weight: 500;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        width: 48%;
+        text-align: center;
+    }
+
+    .bttn:hover {
+        transform: scale(1.05);
+    }
+
+    .btn-buy {
+        background-color: #28a745; /* Green for Buy Now */
+        color: white;
+        border: none;
+    }
+
+    .btn-buy:hover {
+        background-color: #218838;
+    }
+
+    .btn-emi {
+        background-color: #007bff; /* Blue for Pay with EMI */
+        color: white;
+        border: none;
+    }
+
+    .btn-emi:hover {
+        background-color: #0069d9;
+    }
+
+  
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .header-title {
+            font-size: 2.5rem;
+        }
+
+        .show-img-container {
+            grid-template-columns: 1fr;
+        }
+
+        .show-img {
+            width: 100%;
+            height: auto;
+        }
+
+        .action-buttons {
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .btn {
+            width: 100%;
+        }
+    }
+</style>
+
+<!-- Content Section -->
+<div class="container mt-5">
+
+    <div class="header-title text-primary">
+        <%= gear.name %>
+    </div>
+
+    <!-- Card Container -->
+    <div class="card">
+        <div class="show-img-container">
+            <% gear.image.forEach(function(image, index) { %>
+                <div class="col-12">
+                    <!-- Image with Hover Effect -->
+                    <img src="<%= image %>" class="show-img" alt="pack_image" 
+                         data-bs-toggle="modal" data-bs-target="#imageModal" 
+                         data-image="<%= image %>">
+                </div>
+            <% }) %>
+        </div>
+
+   
+        <div class="description offset-1">
+            <%= gear.description %>
+        </div>
+        <div class="price offset-1">
+            <p class="text-primary">₹ <span id="totalPriceDisplay"><%= gear.price.toLocaleString("en-IN") %></span></p>
+        </div>
+        
+
+        <div class="action-buttons">
+            <a class="bttn btn-buy" href="/travel-gears/<%= gear._id %>/buy">Buy Now</a>
+            <a class="bttn btn-emi" href="/travel-gears/<%= gear._id %>/buy">Pay with EMI</a>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for Image Display -->
+<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <img id="modalImage" src="" alt="Enlarged Image" class="img-fluid">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Image Modal Script -->
+<script>
+    document.querySelectorAll('.show-img').forEach(img => {
+        img.addEventListener('click', function() {
+            const modalImage = document.getElementById('modalImage');
+            const imageSrc = this.getAttribute('data-image');
+            modalImage.src = imageSrc;
+        });
+    });
+</script>

@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const review = require("./review");
+const Review = require("./review.js");
 // const { interpackSchema } = require("../schema");
 const Schema = mongoose.Schema;
 
@@ -11,9 +11,9 @@ const packagesSchema = new Schema({
     },
     description: String,
     image:{
-        type: String,
-        default: "https://images.unsplash.com/photo-1504893524553-b855bce32c67?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D=60",
-        set: (v) => v === "" ? "https://images.unsplash.com/photo-1504203328729-b937e8e102f2?q=80&w=928&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D=60" : v,
+        type: [String],
+        default: ["https://unsplash.com/photos/an-aerial-view-of-an-island-in-the-middle-of-the-ocean-YK0t6nYNGTI"],
+        set: (v) => v.length === 0 ? ["https://unsplash.com/photos/an-aerial-view-of-an-island-in-the-middle-of-the-ocean-YK0t6nYNGTI"] : v,
     },
     price: Number,
     location: String,
@@ -24,8 +24,36 @@ const packagesSchema = new Schema({
             ref: "Review",
         },
     ],
+    owner: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+
+    },
+    packSizes: [
+        {
+            size: {
+                type: String,
+                enum: ['2 person', '3 person', '5 person'],
+                required: true,
+            },
+            additionalPrice: {
+                type: Number,
+                default: 0,
+            },
+            availability: {
+                type: Boolean,
+                default: true,
+            },
+        },
+    ],
 });
 
-const intPackage = mongoose.model("internationalPack", packagesSchema);
+packagesSchema.post("findOneAndDelete", async (packages) => {
+    if (packages) {
+        await Review.deleteMany({ _id: { $in: listing.reviews } });
+    }
+});
 
-module.exports = intPackage;
+const InterPackage = mongoose.model("InterPackage", packagesSchema);
+
+module.exports = InterPackage;

@@ -1,9 +1,51 @@
 <% layout("/layouts/boilerplate")  %>
+<style>
+  .card {
+      transition: transform 0.3s ease-in-out;
+  }
+
+  .card:hover {
+      transform: translateY(-15px);
+  }
+
+  .carousel-control-prev,
+  .carousel-control-next {
+      display: none;
+  }
+
+  .card:hover .carousel-control-prev,
+  .card:hover .carousel-control-next {
+      display: flex;
+  }
+</style>
     <h3 class="index mb-4">International Packages</h3>
     <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
 <% for(let package of allPackages) { %>
 <div class="card col">
-    <img src="<%=package.image%>" class="card-img-top" alt="tour_image" style="height: 18rem;">
+
+
+  <div id="packageCarousel<%=package._id%>" class="carousel slide">
+    <div class="carousel-inner">
+        <% package.image.forEach(function(image, index) { %>
+            <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
+                <img src="<%= image %>" class="d-block w-100 show-img" alt="pack_image" id="image"
+                    style="height: 18rem;">
+            </div>
+            <% }) %>
+    </div>
+    <a class="carousel-control-prev" href="#packageCarousel<%=package._id%>" role="button"
+        data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#packageCarousel<%=package._id%>" role="button"
+        data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </a>
+</div>
+
+
     <div class="card-img"></div>
     <div class="card-body">
       <h5 class="card-title"><b><%= package.title %></b></h5>

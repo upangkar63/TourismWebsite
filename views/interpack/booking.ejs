@@ -4,21 +4,15 @@
         height: 15rem;
         width: 25rem !important;
     }
-   
-    .carousel-inner {
-        height: 15rem;
-        width: 25rem !important;
-    }
-
     /* Form Styling */
     .form-control {
-        border-radius: 0.375rem; /* Rounded corners for inputs */
+        border-radius: 0.375rem; 
         box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         transition: all 0.3s ease;
     }
 
     .form-control:focus {
-        border-color: #495057; /* Darker focus border */
+        border-color: #495057; 
         box-shadow: 0 0 0 0.2rem rgba(82, 168, 236, 0.25);
     }
 
@@ -32,7 +26,7 @@
         background-color: #f8f9fa;
     }
 
-    /* Button Styling */
+    
     .btn-dark {
         background-color: #343a40;
         border-color: #343a40;
@@ -53,6 +47,7 @@
         box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
     }
 
+
     .invalid-feedback {
         font-size: 0.875rem;
         color: #dc3545;
@@ -67,22 +62,18 @@
         margin-bottom: 1.5rem;
     }
 
-
-
     .carousel-item img {
         object-fit: cover;
         width: 100%;
         height: 15rem;
     }
 
-    /* Total Price Section */
     .total-price {
         font-size: 1.25rem;
         font-weight: bold;
         color: #2c74e7;
     }
 
-    /* Additional spacing */
     .form-group input, .form-group select {
         margin-bottom: 1rem;
     }
@@ -97,13 +88,10 @@
         padding: 0 0.5rem;
     }
 
-    
-    #packageCarousel<%= package._id %> {
+    #packageCarousel<%= interPack._id %> {
         width: 25rem !important;  
         height: 15rem !important;
       
-      
-
     }
 
     .carousel-inner {
@@ -117,27 +105,28 @@
     }
 
 
+
 </style>
 
 <div class="row mt-3">
     <h2 class="col-6 offset-5"><b>Book Your Trip</b></h2>
 
-    <div id="packageCarousel<%= package._id %>" class="carousel slide offset-3" data-bs-ride="carousel">
+    <div id="packageCarousel<%= interPack._id %>" class="carousel slide offset-3" data-bs-ride="carousel">
         <div class="carousel-inner">
-            <% package.image.forEach(function(image, index) { %>
+            <% interPack.image.forEach(function(image, index) { %>
                 <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
-                    <a href="/packages/international/<%= package._id %>">
+                    <a href="/packages/international/<%= interPack._id %>">
                         <img src="<%= image %>" class="d-block w-100" alt="pack_image" id="image">
                     </a>
                 </div>
             <% }) %>
         </div>
-        
-        <button class="carousel-control-prev" type="button" data-bs-target="#packageCarousel<%= package._id %>" data-bs-slide="prev">
+        <!-- Carousel Controls -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#packageCarousel<%= interPack._id %>" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#packageCarousel<%= package._id %>" data-bs-slide="next">
+        <button class="carousel-control-next" type="button" data-bs-target="#packageCarousel<%= interPack._id %>" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
         </button>
@@ -145,11 +134,13 @@
 
     </div>
 
-    <h3 class="col-6 offset-3 mt-3 text-primary"><%= package.title %></h3>
-  
+        <h3 class=" col-6 offset-3 mt-3 text-primary"><%= interPack.title %></h3>
+ 
+    
 
-    <div class="col-6 offset-3">
-        <form action="/packages/domestic/<%= package._id %>/book" method="POST" class="needs-validation" novalidate>
+   
+    <div class="col-6 offset-3 mt-0">
+        <form action="/packages/international/<%= interPack._id %>/book" method="POST" class="needs-validation" novalidate>
             <!-- Name Input -->
             <div class="form-group">
                 <label for="name" class="form-label">Name</label>
@@ -162,7 +153,6 @@
                 </div>
             </div>
 
-            <!-- Email Input -->
             <div class="form-group">
                 <label for="email" class="form-label">Email</label>
                 <input type="email" name="email" id="email" placeholder="Enter your email" class="form-control" required>
@@ -171,7 +161,6 @@
                 </div>
             </div>
 
-            <!-- Phone Number Input -->
             <div class="form-group">
                 <label for="phoneno" class="form-label">Phone number</label>
                 <div class="input-group">
@@ -188,7 +177,6 @@
                 </div>
             </div>
 
-            <!-- State Input -->
             <div class="form-group">
                 <label for="state" class="form-label">State</label>
                 <input type="text" name="state" id="state" placeholder="Enter your state" class="form-control" required>
@@ -198,7 +186,7 @@
             </div>
 
             <div class="form-row">
-                <!-- City Input -->
+             
                 <div class="form-group col-md-6">
                     <label for="city" class="form-label">City</label>
                     <input type="text" name="city" id="city" placeholder="Enter your city" class="form-control" required>
@@ -207,7 +195,7 @@
                     </div>
                 </div>
 
-                <!-- Travel Date Input -->
+           
                 <div class="form-group col-md-6">
                     <label for="travelDate" class="form-label">Travel Date</label>
                     <input type="date" id="travelDate" name="travelDate" class="form-control" required>
@@ -217,11 +205,11 @@
                 </div>
             </div>
 
-            <!-- Number of People Input -->
+         
             <div class="form-group">
                 <label for="packSize" class="form-label">Number of People</label>
                 <select name="packSize" id="packSize" class="form-control" required onchange="updateAdditionalPrice()">
-                    <% package.packSizes.forEach(size => { %>
+                    <% interPack.packSizes.forEach(size => { %>
                         <option value="<%= size.size %>" data-additional-price="<%= size.additionalPrice %>">
                             <%= size.size %> persons (Additional: &#8377; <%= size.additionalPrice.toLocaleString("en-IN") %>)
                         </option>
@@ -231,15 +219,14 @@
                     Please select the number of people.
                 </div>
             </div>
+            <h5 class="col-6 text-primary">Base Price: &#8377; <%= interPack.price.toLocaleString("en-IN") %></h5>
 
-            <h5 class="col-6 text-primary">Base Price: &#8377; <%= package.price.toLocaleString("en-IN") %></h5>
+            <p class="total-price mt-3">Total: &#8377; <span id="totalPriceDisplay"><%= interPack.price.toLocaleString("en-IN") %></span></p>
 
-            <!-- Total Price Display -->
-            <p class="total-price mt-3">Total: &#8377; <span id="totalPriceDisplay"><%= package.price.toLocaleString("en-IN") %></span></p>
+            
 
-            <!-- Hidden Fields -->
             <input type="hidden" name="additionalPrice" id="additionalPriceInput" value="0">
-            <input type="hidden" name="totalPrice" id="totalPriceInput" value="<%= package.price %>">
+            <input type="hidden" name="totalPrice" id="totalPriceInput" value="<%= interPack.price %>">
 
             <button class="btn btn-dark mb-5" type="submit">Checkout</button>
         </form>
@@ -256,7 +243,7 @@
     function updateAdditionalPrice() {
         const selectedOption = document.querySelector("#packSize").selectedOptions[0];
         const additionalPrice = parseFloat(selectedOption.getAttribute("data-additional-price"));
-        const basePrice = <%= package.price %>;  // Base price from the server-side
+        const basePrice = <%= interPack.price %>;  // Base price from the server-side
         const totalPrice = basePrice + additionalPrice;
 
        

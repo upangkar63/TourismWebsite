@@ -98,7 +98,7 @@
     }
 
     
-    #packageCarousel<%= package._id %> {
+    #packageCarousel<%= gear._id %> {
         width: 25rem !important;  
         height: 15rem !important;
       
@@ -120,24 +120,24 @@
 </style>
 
 <div class="row mt-3">
-    <h2 class="col-6 offset-5"><b>Book Your Trip</b></h2>
+    <h2 class="col-6 offset-5"><b>Personal Information</b></h2>
 
-    <div id="packageCarousel<%= package._id %>" class="carousel slide offset-3" data-bs-ride="carousel">
+    <div id="packageCarousel<%= gear._id %>" class="carousel slide offset-3" data-bs-ride="carousel">
         <div class="carousel-inner">
-            <% package.image.forEach(function(image, index) { %>
+            <% gear.image.forEach(function(image, index) { %>
                 <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
-                    <a href="/packages/international/<%= package._id %>">
+                    <a href="/travel-gears/<%= gear._id %>">
                         <img src="<%= image %>" class="d-block w-100" alt="pack_image" id="image">
                     </a>
                 </div>
             <% }) %>
         </div>
         
-        <button class="carousel-control-prev" type="button" data-bs-target="#packageCarousel<%= package._id %>" data-bs-slide="prev">
+        <button class="carousel-control-prev" type="button" data-bs-target="#packageCarousel<%= gear._id %>" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#packageCarousel<%= package._id %>" data-bs-slide="next">
+        <button class="carousel-control-next" type="button" data-bs-target="#packageCarousel<%= gear._id %>" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
         </button>
@@ -145,11 +145,11 @@
 
     </div>
 
-    <h3 class="col-6 offset-3 mt-3 text-primary"><%= package.title %></h3>
+    <h3 class="col-6 offset-3 mt-3 text-primary"><%= gear.name %></h3>
   
 
     <div class="col-6 offset-3">
-        <form action="/packages/domestic/<%= package._id %>/book" method="POST" class="needs-validation" novalidate>
+        <form action="/travel-gears/<%= gear._id %>/buy" method="POST" class="needs-validation" novalidate>
             <!-- Name Input -->
             <div class="form-group">
                 <label for="name" class="form-label">Name</label>
@@ -209,77 +209,20 @@
 
                 <!-- Travel Date Input -->
                 <div class="form-group col-md-6">
-                    <label for="travelDate" class="form-label">Travel Date</label>
-                    <input type="date" id="travelDate" name="travelDate" class="form-control" required>
+                    <label for="pincode" class="form-label">Pin code</label>
+                    <input type="pincode" id="pincode" name="pincode" class="form-control" required>
                     <div class="invalid-feedback">
-                        Please provide your travel date.
+                        Please provide your pin code.
                     </div>
                 </div>
             </div>
 
-            <!-- Number of People Input -->
-            <div class="form-group">
-                <label for="packSize" class="form-label">Number of People</label>
-                <select name="packSize" id="packSize" class="form-control" required onchange="updateAdditionalPrice()">
-                    <% package.packSizes.forEach(size => { %>
-                        <option value="<%= size.size %>" data-additional-price="<%= size.additionalPrice %>">
-                            <%= size.size %> persons (Additional: &#8377; <%= size.additionalPrice.toLocaleString("en-IN") %>)
-                        </option>
-                    <% }) %>
-                </select>
-                <div class="invalid-feedback">
-                    Please select the number of people.
-                </div>
-            </div>
 
-            <h5 class="col-6 text-primary">Base Price: &#8377; <%= package.price.toLocaleString("en-IN") %></h5>
+            <h5 class="col-6 text-primary">Price: &#8377; <%= gear.price.toLocaleString("en-IN") %></h5>
 
-            <!-- Total Price Display -->
-            <p class="total-price mt-3">Total: &#8377; <span id="totalPriceDisplay"><%= package.price.toLocaleString("en-IN") %></span></p>
-
-            <!-- Hidden Fields -->
-            <input type="hidden" name="additionalPrice" id="additionalPriceInput" value="0">
-            <input type="hidden" name="totalPrice" id="totalPriceInput" value="<%= package.price %>">
 
             <button class="btn btn-dark mb-5" type="submit">Checkout</button>
         </form>
     </div>
 </div>
 
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        updateAdditionalPrice();  // Initialize on page load
-    });
-
-    
-    function updateAdditionalPrice() {
-        const selectedOption = document.querySelector("#packSize").selectedOptions[0];
-        const additionalPrice = parseFloat(selectedOption.getAttribute("data-additional-price"));
-        const basePrice = <%= package.price %>;  // Base price from the server-side
-        const totalPrice = basePrice + additionalPrice;
-
-       
-        document.getElementById("additionalPriceInput").value = additionalPrice;
-        document.getElementById("totalPriceInput").value = totalPrice;
-
-       
-        document.getElementById("totalPriceDisplay").innerText = totalPrice.toLocaleString("en-IN");
-    }
-
-    document.querySelector("form").addEventListener("submit", function(event) {
-        const phoneInput = document.querySelector("#phoneno");
-        const countryCode = document.querySelector("#countryCode").value;
-        const phoneValue = phoneInput.value;
-
-        const fullPhoneNumber = countryCode + phoneValue;
-
-        const phonePattern = /^\+\d{1,3}\d{10}$/;  // Matches +[1-3 digits for country code] + 10 digits
-        if (!phonePattern.test(fullPhoneNumber)) {
-            event.preventDefault(); // Prevent form submission if validation fails
-            phoneInput.setCustomValidity("Please enter a valid phone number with the correct country code.");
-        } else {
-            phoneInput.setCustomValidity(""); // Clears custom validity
-        }
-    });
-</script>

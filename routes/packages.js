@@ -1,11 +1,10 @@
 const express = require("express");
 const router = express.Router();
-// const Package = require("../models/travelTour.js");
-// const interPackage = require("../models/internationalPack.js");
 const wrapAsync = require("../utils/wrapAsync");
 const ExpressError = require("../utils/ExpressError");
 const {packageSchema} = require("../schema.js");
 const {isLoggedIn} = require("../middleware.js");
+const Booking = require("../models/booking.js");
 
 const packageController = require("../controllers/packages.js");
 
@@ -25,9 +24,11 @@ router.get("/",
     wrapAsync(packageController.index ));
 
 // Book page
-router.get("/:id/book", isLoggedIn, packageController.book);
+router.get("/:id/book", isLoggedIn,  packageController.book);
 
+router.post("/:id/book", isLoggedIn, packageController.booking);
 
+router.get("/:id/bookings/:bookingId/confirm", packageController.confirmbook);
 // About
 router.get("/about", packageController.about);
 

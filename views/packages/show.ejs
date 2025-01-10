@@ -1,94 +1,356 @@
 <% layout("/layouts/boilerplate") %>
-    <div class="row mt-3">
-        <div class="col-8 offset-3">
-            <h3 class="mb-4"><b>
-                    <%= pack.title %>
-                </b></h3>
+<style>
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .row {
+        margin: 0;
+    }
+
+    .mb-4 {
+        margin-bottom: 2rem !important;
+    }
+
+    .display-4 {
+        font-size: 1.8rem;
+        font-weight: 700;
+      
+    }
+
+    .font-weight-bold {
+        font-weight: 700;
+    }
+
+    /* Card Styling */
+    .card {
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+    }
+
+    .card-body {
+        padding: 2rem;
+    }
+
+    .show-img-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        margin-bottom: 2rem;
+    }
+
+    .show-img {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        border-radius: 8px;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .show-img:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Form Inputs */
+    .form-check-label {
+        font-size: 1.1rem;
+        color: #555;
+    }
+
+    .form-check-input {
+        height: 1.25rem;
+        width: 1.25rem;
+        margin-top: 0.3rem;
+    }
+
+    .form-control {
+        
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        background-color: #f8f9fa;
+        font-size: 1rem;
+        color: #333;
+    }
+
+    .form-control:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 10px rgba(0, 123, 255, 0.25);
+    }
+
+    /* Buttons */
+
+    .btn-danger {
+        background-color: #dc3545;
+        border: none;
+        color: white;
+    }
+
+    .btn-danger:hover {
+        background-color: #c82333;
+        transform: scale(1.05);
+    }
+
+    /* Review Section */
+    .review-card {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        background-color: #fff;
+        margin-bottom: 1.5rem;
+        padding: 1.5rem;
+    }
+
+    .review-card .card-body {
+        padding: 0;
+    }
+
+    .review-card h6 {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #333;
+    }
+
+    .review-card p {
+        font-size: 1rem;
+        color: #555;
+    }
+
+    .review-card .starability-result {
+        font-size: 1.3rem;
+        color: #ffd700;
+    }
+
+    /* Reviews Section */
+    .reviews-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #2c3e50;
+        margin-top: 2rem;
+        margin-bottom: 1.5rem;
+    }
+
+    /* Image Hover Effects */
+    .show-img-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        margin-bottom: 20px;
+    }
+
+        /* Basic Modal Styling */
+        .modal-dialog {
+        max-width: 50%;
+        
+    }
+
+    .modal-body {
+        text-align: center;
+    }
+
+    .img-fluid {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+    }
+
+ 
+
+    /* Responsive Styling */
+    @media (max-width: 768px) {
+        .show-img-container {
+            grid-template-columns: 1fr;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .display-4 {
+            font-size: 2rem;
+        }
+
+
+        .reviews-title {
+            font-size: 1.25rem;
+        }
+    }
+
+    /* Hover effects for buttons */
+     .btn-dark:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+</style>
+
+<div class="container mt-5">
+    <!-- Package Title -->
+    <div class="row mb-4">
+        <div class="col-lg-8 offset-lg-2 text-center">
+            <h3 class="display-4 text-primary"><%= pack.title %></h3>
         </div>
-        <div class="card col-6 offset-3 show-card">
-            <img src="<%=pack.image%>" class="card-img-top show-img" alt="pack_image">
-            <div class="card-body">
-                <p class="card-text">
-                <p>
-                    <%=pack.description%>
-                </p>
-                <p> &#8377; <%=pack.price.toLocaleString("en-IN")%> </p>
-                <i class="fa fa-map-marker d-flex" style="color:#f39c12"></i> <p>
-                    <%=pack.location%>
-                </p>
-                <i class="fa fa-flag d-flex" style="color:#f39c12"></i><p>
-                    <%=pack.country%>
-                </p>
-                </p>
+    </div>
+
+    
+    <div class="card shadow-lg rounded-lg">
+    <!-- The image container -->
+<div class="show-img-container">
+    <% pack.image.forEach(function(image, index) { %>
+        <div class="col-12 <%= index >= 3 ? 'two-images' : '' %>">
+            <!-- Add click event and set data attributes for modal display -->
+            <img src="<%= image %>" class="show-img" alt="pack_image" 
+                data-bs-toggle="modal" data-bs-target="#imageModal" 
+                data-image="<%= image %>">
+        </div>
+    <% }) %>
+</div>
+
+<!-- Modal for image display -->
+<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <img id="modalImage" src="" alt="Enlarged Image" class="img-fluid">
             </div>
         </div>
     </div>
-    <div class="btns offset-3">
-        <form action="/packages/domestic/<%= pack._id%>/book" method="GET">
-            <button class="btn btn-dark">Book Package</button>
-        </form>
-    </div>
+</div>
 
-    <div class="col-8 offset-3 mb-2">
-        <hr>
-        <% if(currUser) { %>
-            <form action="/packages/<%= pack._id%>/reviews" method="POST" novalidate class="needs-validation">
-        <h5>Write a review</h5>
-        <div class="mb-3 mt-3">
-            <label for="rating" class="form-label">Rating</label>
-            <fieldset class="starability-heartbeat">
-
-                <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked
-                    aria-label="No rating." />
-                <input type="radio" id="first-rate1" name="review[rating]" value="1" />
-                <label for="first-rate1" title="Terrible">1 star</label>
-                <input type="radio" id="first-rate2" name="review[rating]" value="2" />
-                <label for="first-rate2" title="Not good">2 stars</label>
-                <input type="radio" id="first-rate3" name="review[rating]" value="3" />
-                <label for="first-rate3" title="Average">3 stars</label>
-                <input type="radio" id="first-rate4" name="review[rating]" value="4" />
-                <label for="first-rate4" title="Very good">4 stars</label>
-                <input type="radio" id="first-rate5" name="review[rating]" value="5" />
-                <label for="first-rate5" title="Amazing">5 stars</label>
-            </fieldset>
-        </div>
-
-        <div class="mb-3 mt-3">
-            <label for="comment" class="form-label">Comment</label>
-            <textarea name="review[comment]" id="comment" cols="30" rows="5" placeholder="Comment here!"
-                class="form-control" required></textarea>
-            <div class="invalid-feedback">Comments should not be empty!</div>
-        </div>
-        <button class="btn btn-dark mb-2">Submit</button>
-        <% } %>
-        </form>
-        <hr />
-        <p> <b>All Reviews</b></p>
-        <div class="row">
-            <% for(review of pack.reviews) {%>
-                <div class="card col-5 ms-3 mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title">User</h5>
-                        <p class="card-text">
-                            <%= review.comment %>
-                        </p>
-                        <p class="card-text">
-                            <%= review.rating %> Stars
-                        </p>
-
-                        <!-- <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star "></span> -->
+        <!-- Card Body -->
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-8">
+                    <!-- Package Description -->
+                    <p><%= pack.description %></p>
+                    <div class="d-flex align-items-center mb-2">
+                        <i class="fa fa-map-marker-alt text-info"></i>
+                        <p class="ms-2 mb-0"><%= pack.location %></p>
                     </div>
-                    <form action="/packages/<%= pack._id%>/reviews/<%= review._id %>?_method=DELETE" class="mb-3"
-                        method="POST">
-                        <button class="btn btn-primary">Delete</button>
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fa fa-flag-checkered text-info"></i>
+                        <p class="ms-2 mb-0"><%= pack.country %></p>
+                    </div>
+
+                    <!-- Package Price -->
+                    <p class="h4 text-dark mb-3">₹ <span id="basePrice"><%= pack.price.toLocaleString("en-IN") %></span> / day</p>
+
+                    <!-- Package Size Options -->
+                    <form class="needs-validation" action="/packages/domestic/<%= pack._id %>/book" method="GET" novalidate>
+                        <% pack.packSizes.forEach(function(size) { %>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="packSize" id="packSize<%= size.size %>" value="<%= size.size %>" data-additional-price="<%= size.additionalPrice %>" required onchange="updateTotalPrice()">
+                                <label class="form-check-label" for="packSize<%= size.size %>">
+                                    <%= size.size %> persons (Additional: ₹ <%= size.additionalPrice.toLocaleString("en-IN") %>)
+                                </label>
+                            </div>
+                        <% }) %>
+
+                        <!-- Hidden fields for pricing -->
+                        <input type="hidden" name="basePrice" value="<%= pack.price %>">
+                        <input type="hidden" name="totalPrice" id="totalPriceInput" value="<%= pack.price %>">
+
+                        <!-- Total Price Display -->
+                        <p class="h5 mt-3">Total: ₹ <span id="totalPriceDisplay"><%= pack.price.toLocaleString("en-IN") %></span></p>
+
+                        <!-- Book Button -->
+                        <button class="btn btn-primary mt-4 mb-3" type="submit">Book Package</button>
                     </form>
                 </div>
-
-                <% } %>
+            </div>
         </div>
     </div>
+
+    <div class="card shadow-lg rounded-lg">
+    <!-- Reviews Section -->
+    <div class="col-md-8 offset-md-2 mb-5">
+        <hr class="my-4">
+        <% if(currUser) { %>
+            <form action="/packages/domestic/<%= pack._id %>/reviews" method="POST" class="needs-validation">
+                <h5 class="font-weight-bold">Write a Review</h5>
+                <div class="mb-3">
+                    <label for="rating" class="form-label">Rating</label>
+                    <fieldset class="starability-heartbeat">
+                        <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
+                        <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+                        <label for="first-rate1" title="Terrible">1 star</label>
+                        <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+                        <label for="first-rate2" title="Not good">2 stars</label>
+                        <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+                        <label for="first-rate3" title="Average">3 stars</label>
+                        <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+                        <label for="first-rate4" title="Very good">4 stars</label>
+                        <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+                        <label for="first-rate5" title="Amazing">5 stars</label>
+                    </fieldset>
+                </div>
+
+                <div class="mb-3">
+                    <label for="comment" class="form-label">Comment</label>
+                    <textarea name="review[comment]" id="comment" rows="4" class="form-control" placeholder="Write your review here..." required></textarea>
+                </div>
+
+                <button class="btn btn-primary w-100">Submit Review</button>
+            </form>
+        <% } %>
+        <% if(currUser) { %>
+        <% if(pack.reviews.length > 0) { %>
+            <hr class="my-4">
+            <h5 class="font-weight-bold">All Reviews</h5>
+            <div class="row">
+                <% pack.reviews.forEach(function(review) { %>
+                    <div class="col-md-5 ms-3 mb-4">
+                        <div class="card shadow-md rounded-lg">
+                            <div class="card-body offset-1">
+                                <h6 class="card-title font-weight-bold"><%= review.author.username %></h6>
+                                <p class="starability-result card-text" data-rating="<%= review.rating %>"></p>
+                                <p class="card-text"><%= review.comment %></p>
+                            </div>
+                          
+                                <form action="/packages/domestic/<%= pack._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST">
+                                    <button class="btn btn-danger mb-2 offset-1">Delete</button>
+                                </form>
+                           
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+            <% } %>
+        <% } %>
     </div>
+</div>
+</div>
+
+    <script>
+
+        function updateTotalPrice() {
+            const selectedSize = document.querySelector('input[name="packSize"]:checked');
+            const basePrice = parseFloat(document.querySelector('input[name="basePrice"]').value);
+            let additionalPrice = 0;
+
+            if (selectedSize) {
+                additionalPrice = parseFloat(selectedSize.getAttribute('data-additional-price'));
+            }
+
+            const totalPrice = basePrice + additionalPrice;
+            document.getElementById('totalPriceDisplay').innerText = totalPrice.toLocaleString("en-IN");
+            document.getElementById('totalPriceInput').value = totalPrice;
+        }
+
+        //When an image is clicked, set the modal's image source
+    const images = document.querySelectorAll('.show-img');
+    images.forEach(image => {
+        image.addEventListener('click', (event) => {
+            const imgSrc = event.target.getAttribute('data-image');
+            const modalImage = document.getElementById('modalImage');
+            modalImage.src = imgSrc;
+        });
+    });
+
+
+    </script>

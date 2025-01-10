@@ -1,0 +1,169 @@
+<% layout("/layouts/boilerplate") %>
+
+<style>
+    .container2 {
+        max-width: 900px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        text-align: center;
+        color: #007bff;
+    }
+
+    p {
+        text-align: center;
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+    .img {
+        margin-right: 10px;
+        display: inline-block;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .img img {
+        width: 200px;
+        height: 150px;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .img img:hover {
+        transform: scale(1.1);
+    }
+
+    .images {
+        margin-top: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .images .img {
+        margin: 10px;
+    }
+
+    .description {
+        margin-top: 20px;
+        background-color: #f7f7f7;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .description p {
+        margin: 0;
+        font-size: 14px;
+        color: #555;
+    }
+    .order-btn {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-right: 20px;
+    }
+
+    .order-btn:hover {
+        background-color: #0056b3;
+    }
+
+    .cancel-btn {
+        padding: 10px 20px;
+        background-color: #dc3545;
+        color: white;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .cancel-btn:hover {
+        background-color: #c82333;
+    }
+</style>
+    <div class="container2">
+        
+        <h2>
+            <%= booking.packageId.title %>
+        </h2>
+        <div class="images">
+            <strong class="img">
+                <img src="<%= booking.packageId.image[0] %>" alt="">
+            </strong>
+            <strong class="img">
+                <img src="<%= booking.packageId.image[1] %>" alt="">
+            </strong>
+            <strong class="img">
+                <img src="<%= booking.packageId.image[2] %>" alt="">
+            </strong>
+            <strong class="img">
+                <img src="<%= booking.packageId.image[3] %>" alt="">
+            </strong>
+            <strong class="img">
+                <img src="<%= booking.packageId.image[4] %>" alt="">
+            </strong>
+
+        </div>
+        <p><strong>Description:</strong>
+        <%= booking.packageId.description %>
+        </p>
+
+        <h2>Booking Details</h2>
+        <p><strong>Name:</strong>
+            <%= booking.name %>
+        </p>
+        <p><strong>Email:</strong>
+            <%= booking.email %>
+        </p>
+        <p><strong>Phone Number:</strong>
+            <%= booking.phoneno %>
+        </p>
+        <p><strong>State:</strong>
+            <%= booking.state %>
+        </p>
+        <p><strong>City:</strong>
+            <%= booking.city %>
+        </p>
+        <p><strong>
+            Number of People:
+        </strong>
+        <%= booking.packSize %>
+    </p>
+        <p><strong>Base Price:</strong>
+            &#8377; <%= booking.packageId.price.toLocaleString("en-IN")%>
+        </p>
+        <p><strong>Total Price:</strong>
+            &#8377; <%= booking.totalPrice.toLocaleString("en-IN") %>
+        </p>
+        <p><strong>Booked on:</strong>
+            <%= booking.createdAt.toLocaleString() %>
+        </p>
+        <p><strong>Tour Date:</strong>
+            <%= booking.createdAt.toDateString() %>
+        </p>
+    </div>
+
+       
+    <div class="d-flex offset-4 mb-5 ">
+        <form action="/my-bookings" method="get">
+            <button class="btn btn-primary order-btn">Bookings</button>
+        </form>
+   <form method="post" action="/my-bookings/details/<%= booking._id %>?_method=DELETE">
+    <button class="cancel-btn">Cancel Booking</button>
+   </form>
+    </div>
+    

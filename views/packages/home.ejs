@@ -4,17 +4,58 @@
     </script>
 
     <style>
-        #map {
+        /* #map {
             position: absolute;
             top: 0;
             bottom: 0;
             width: 100%;
             height: 100vh;
             z-index: 1;
+        } */
+
+        .main-txt .heading-text {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            line-height: 1.2;
+            text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
         }
     </style>
     <section class="hero">
-        <div id="map"></div>
+        <!-- <div id="map"></div> -->
+        <div id="back-img">
+            <div id="packageCarousel<%=images._id%>" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="packageCarousel<%=images._id%>" data-bs-slide-to="0"
+                        class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="packageCarousel<%=images._id%>" data-bs-slide-to="1"
+                        aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="packageCarousel<%=images._id%>" data-bs-slide-to="2"
+                        aria-label="Slide 3"></button>
+                    <button type="button" data-bs-target="packageCarousel<%=images._id%>" data-bs-slide-to="3"
+                        aria-label="Slide 4"></button>
+                </div>
+                <div class="carousel-inner">
+                    <% images.forEach(function(image, index) { %>
+                        <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
+                            <img src="<%= image %>" class="d-block w-100 back-img" alt="pack_image" id="image">
+                        </div>
+                        <% }) %>
+                </div>
+                <a class="carousel-control-prev" href="#packageCarousel<%=images._id%>" role="button"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#packageCarousel<%=images._id%>" role="button"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </a>
+            </div>
+        </div>
         <div class="hero-content">
             <h1>WHERE YOUR JOURNEY BEGINS!</h1>
             <p>Explore the world with us and make unforgettable memories.</p>
@@ -22,11 +63,11 @@
         </div>
     </section>
 
-    <hr>
+
     <!-- Package -->
     <section class="packages">
         <div class="main-txt">
-            <h3>POPULAR PACKAGES</h3>
+            <h3 class="heading-text">POPULAR PACKAGES</h3>
         </div>
 
         <div class="card-content">
@@ -44,7 +85,8 @@
                         <i class="fa-solid fa-star checked"></i> 5.0
 
                     </div>
-                    <button class="btn btn-primary"><a href="/packages/domestic/<%= package._id %>">See Details</a></button>
+                    <button class="btn btn-dark mb-4"><a href="/packages/domestic/<%= package._id %>">See
+                            Details</a></button>
                 </div>
                 <% } %>
         </div>
@@ -54,7 +96,7 @@
 
     <section class="packages">
         <div class="main-txt">
-            <h3>INTERNATIONAL PACKAGES</h3>
+            <h3 class="heading-text">INTERNATIONAL PACKAGES</h3>
         </div>
 
         <div class="card-content">
@@ -71,7 +113,7 @@
                         <i class="fa-solid fa-star checked"></i>
                         <i class="fa-solid fa-star checked"></i> 5.0
                     </div>
-                    <button class="btn btn-primary mb-5"><a href="/packages/international/<%= interpack._id %>">See
+                    <button class="btn btn-dark mb-5"><a href="/packages/international/<%= interpack._id %>">See
                             Details</a></button>
                 </div>
                 <% } %>

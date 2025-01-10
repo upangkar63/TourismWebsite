@@ -1,7 +1,7 @@
 <% layout("/layouts/boilerplate") %>
 
 <div class="container mt-5">
-    <h2 class="text-center mb-4 text-primary">Your Bookings</h2>
+    <h2 class="text-center mb-4 text-primary">Your Orders</h2>
 
     <table class="table table-bordered table-striped table-hover">
         <thead class="thead-dark">
@@ -10,13 +10,8 @@
                 <th>Name</th>
                 <th>Email</th>
                 <th>Phone Number</th>
-                <th>State</th>
-                <th>City</th>
-                <th>Travel Date</th>
-                <th>Number of People</th>
-                <th>Package Title</th>
-                <th>Package Price</th>
-                <th>Total Price</th>
+                <th>Title</th>
+                <th>Price</th>
                 <th>Details</th>
             </tr>
         </thead>
@@ -29,9 +24,9 @@
                 <% bookings.forEach(booking => { %>
                     <tr>
                         <td>
-                            <% if (booking.packageId) { %>
+                            <% if (booking.gearId) { %>
                               
-                                <img src="<%= booking.packageId.image[0] %>" alt="package_image" class="package-image img-fluid" />
+                                <img src="<%= booking.gearId.image[0] %>" alt="package_image" class="package-image img-fluid" />
                             <% } else { %>
                                 <img src="default-image-url.jpg" alt="No image available" class="package-image img-fluid" />
                             <% } %>
@@ -39,33 +34,24 @@
                         <td><%= booking.name %></td>
                         <td><%= booking.email %></td>
                         <td><%= booking.phoneno %></td>
-                        <td><%= booking.state %></td>
-                        <td><%= booking.city %></td>
-                        <td><%= new Date(booking.travelDate).toLocaleDateString() %></td>
-                        <td><%= booking.packSize %></td>
+                      
                         <td>
-                            <% if (booking.packageId) { %>
-                                <a href="/packages/domestic/<%= booking.packageId._id %>" class="text-primary"><%= booking.packageId.title %></a>
+                            <% if (booking.gearId) { %>
+                                <a href="/travel-gears/<%= booking.gearId._id%>" class="text-primary"><%= booking.gearId.name %></a>
                             <% } else { %>
                                 N/A
                             <% } %>
                         </td>
                         <td>
-                            <% if (booking.packageId) { %>
-                                &#8377; <%= booking.packageId.price.toLocaleString("en-IN") %>
+                            <% if (booking.gearId) { %>
+                                &#8377; <%= booking.gearId.price.toLocaleString("en-IN") %>
                             <% } else { %>
                                 N/A
                             <% } %>
                         </td>
+        
                         <td>
-                            <% if (booking.totalPrice && !isNaN(booking.totalPrice)) { %>
-                                &#8377; <%= Number(booking.totalPrice).toLocaleString("en-IN") %>
-                            <% } else { %>
-                                N/A
-                            <% } %>
-                        </td>
-                        <td>
-                            <a href="/my-bookings/details/<%= booking._id %>" class="btn btn-info btn-sm">See details</a>
+                            <a href="/my-bookings/gears/details/<%= booking._id %>" class="btn btn-info btn-sm">See details</a>
                         </td>
                     </tr>
                 <% }); %>
@@ -74,7 +60,7 @@
     </table>
 </div>
 
-
+<!-- Add custom styling -->
 <style>
     /* Table styling */
     .table {
@@ -100,11 +86,11 @@
 
     /* Responsive Image Styling */
     .package-image {
-        border-radius: 10px;
+        border-radius: 10px; 
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
         transition: transform 0.3s ease, box-shadow 0.3s ease; 
-        max-width: 100%;
-        height: auto;
+        max-width: 100%; 
+        height: 10rem !important;
     }
 
     .package-image:hover {

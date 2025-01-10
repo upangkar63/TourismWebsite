@@ -1,0 +1,68 @@
+<% layout("/layouts/boilerplate") %>
+<style>
+.booking-details {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    background-color: #fafafa;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.booking-details h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.booking-details p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #555;
+    margin: 10px 0;
+}
+.gear_image {
+    height: 15rem;
+    width: auto;
+    border-radius: 8px;
+}
+.booking-details strong {
+    font-weight: bold;
+    color: #333;
+}
+
+.booking-details p:last-child {
+    margin-bottom: 0;
+}
+
+.booking-details .info-group {
+    margin-bottom: 15px;
+}
+
+.booking-details .info-group p {
+    margin: 5px 0;
+}
+
+.booking-details .info-group p strong {
+    color: #007BFF; 
+}
+
+</style>
+
+<h2 class="offset-3 mt-5">Order Confirmation</h2>
+
+<div class="booking-details">
+    
+    <p><strong>Image:</strong><img src="<%= booking.gearId.image[0] %>" alt="gear_image" class="gear_image"></p>
+    <p><strong>Gear:</strong> <%= booking.gearId.name %></p>
+    <p><strong>Name:</strong> <%= booking.name %></p>
+    <p><strong>Email:</strong> <%= booking.email %></p>
+    <p><strong>Phone:</strong> <%= booking.phoneno %></p>
+    <p><strong>State:</strong> <%= booking.state %></p>
+    <p><strong>City:</strong> <%= booking.city %></p>
+    
+</div>
+
+<a href="/travel-gears" class="btn btn-dark mb-5 offset-3" style="display: inline-block;">Back to Gears</a>
+

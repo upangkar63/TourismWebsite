@@ -1,5 +1,6 @@
 const Review = require("../models/review.js");
 const Package = require("../models/travelTour.js");
+const ExpressError = require("../utils/ExpressError.js");
 
 module.exports.createReview = async(req, res ) => {
     // console.log(req.body);
@@ -8,9 +9,10 @@ if(!package) {
     throw new ExpressError("Package not found", 404);
 }
 let newReview = new Review(req.body.review);
-package.reviews.push(newReview);
-
+newReview.author = req.user._id;
 await newReview.save();
+
+package.reviews.push(newReview);
 await package.save();
 
 req.flash("success", "New review Created!");

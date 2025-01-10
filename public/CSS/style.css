@@ -5,22 +5,6 @@ body{
     font-family: "Poppins", sans-serif !important;
 }
 
-/* Dark mode */
-/* body.dark-mode {
-    background-color: #222;
-    color: white;
-}
-
-body.dark-mode .hero {
-    background-color: #333;
-}
-
-body.dark-mode .card-body2 {
-    background-color: #444;
-    color: white;
-} */
-
-
 
 /* navbar */
 .navbar-brand .logo{
@@ -46,6 +30,10 @@ body.dark-mode .card-body2 {
 
 .navbar-toggler {
     border: none;
+}
+.navbar-toggler:hover {
+    border: none;
+    background-color: white;
 }
 .navbar h3 b custom {
     color:#54b4d3;
@@ -191,15 +179,6 @@ body.dark-mode .card-body2 {
     font-weight: 400 !important;
 }
 
-/* Card effect */
-.card{
-    transition: transform 0.3s ease-in-out;
-}
-
-.card:hover {
-    transform: translateY(-15px);
-}
-
 /* button */
 .btn {
     /* background-color:  #13C3F7 !important; */
@@ -213,7 +192,14 @@ body.dark-mode .card-body2 {
 
 /* Show page */
 .show-img{
-    height: 30vh !important;
+    height: 50vh !important;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.show-img:hover {
+    transform: scale(1.05); 
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
 }
 .show-card{
     padding-left: 0;
@@ -257,6 +243,10 @@ footer {
 .footer-links a:hover {
     text-decoration: underline;
 }
+.footer-brands i{
+    padding: 0 4px 4px 4px;
+    
+}
 
 .footer-info p {
     margin: 0;
@@ -275,46 +265,6 @@ footer {
     }
 }
 
-
-/* Explore page */
-
-.explore-section {
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.container {
-    text-align: center;
-}
-
-/* Filters Section */
-.explore-filters {
-    display: flex;
-    justify-content: center;
-    margin: 20px 0;
-    gap: 15px;
-}
-input[type="text"], select { 
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #e59400;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #d28d0d;
-}
 
 /* Destination Cards */
 .explore-grid {
